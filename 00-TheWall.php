@@ -135,13 +135,14 @@ if(isset($_POST["contents"])) {
             
             // TODO: uit database halen
 
+             $result = $conn->query($sql);
+
             for($i=0; $i<$result->rowCount(); $i++) {
                 $row = $result->fetch(PDO::FETCH_ASSOC);
                 echo "<tr>";
                 print_r($row);
                 // VUL AAN zodat alle inhouden en tijdstippen worden getoond
                 echo "</tr>";
-            }
             
             $message1 = array(
               "tijdstip" => date("Y-m-d H:i:s"),
@@ -157,7 +158,8 @@ if(isset($_POST["contents"])) {
               $message1,
               $message2
             );
-            
+            }
+
             foreach($messages as $msg) {
             
 	       $html = '<div class="TheWallMessage">';
@@ -165,7 +167,7 @@ if(isset($_POST["contents"])) {
 	       $html .= $msg["tijdstip"];
                $html .= "</div>";
                $html .= '<div class="TheWallMessageContent">';
-               $html .= $msg["message"];
+               $html .= $msg["inhoud"];
                $html .= "</div>";
                $html .= "</div>";
                
