@@ -179,15 +179,6 @@ if(isset($_POST["contents"])) {
             
             
             ?>
-                <div class="TheWallMessage">
-                    <div class="TheWallMessageHeader">
-                        2015-05-05 00:00:00
-                    </div>
-                    <div class="TheWallMessageContent">
-                        Test Message
-                    </div>
-                </div>
-            </div>
 
             <div id="TheWallInputForm">
                 <form role="form" method="post">
