@@ -1,6 +1,18 @@
 <?php
+
+
 if(isset($_POST["contents"])) {
   // store in database
+  include 'db_credentials.php';
+
+    $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+        // set the PDO error mode to exception
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $sql = "SELECT inhoud, tijdstip
+            FROM messages;
+        )";
+
   echo $_POST["contents"];
 }
 ?>
@@ -122,6 +134,14 @@ if(isset($_POST["contents"])) {
             <?php
             
             // TODO: uit database halen
+
+            for($i=0; $i<$result->rowCount(); $i++) {
+                $row = $result->fetch(PDO::FETCH_ASSOC);
+                echo "<tr>";
+                print_r($row);
+                // VUL AAN zodat alle inhouden en tijdstippen worden getoond
+                echo "</tr>";
+            }
             
             $message1 = array(
               "tijdstip" => date("Y-m-d H:i:s"),
