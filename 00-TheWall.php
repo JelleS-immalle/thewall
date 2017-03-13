@@ -12,6 +12,24 @@ if(isset($_POST["contents"])) {
         $sql = "SELECT inhoud, tijdstip
             FROM messages;
         )";
+        
+        $result = $conn->query($sql);
+
+        for($i=0; $i<$result->rowCount(); $i++) {
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+        echo "<tr>";
+        print_r($row);            
+	       $html = '<div class="TheWallMessage">';
+	       $html .= '<div class="TheWallMessageHeader">';
+	       $html .= $msg["tijdstip"];
+            $html .= "</div>";
+            $html .= '<div class="TheWallMessageContent">';
+            $html .= $msg["inhoud"];
+            $html .= "</div>";
+            $html .= "</div>";
+        echo $html;
+        echo "</tr>";
+    }
 
   echo $_POST["contents"];
 }
@@ -129,20 +147,10 @@ if(isset($_POST["contents"])) {
             </div>
 
             
-            
             <div id="TheWallMessages">
             <?php
             
             // TODO: uit database halen
-
-             $result = $conn->query($sql);
-
-            for($i=0; $i<$result->rowCount(); $i++) {
-                $row = $result->fetch(PDO::FETCH_ASSOC);
-                echo "<tr>";
-                print_r($row);
-                // VUL AAN zodat alle inhouden en tijdstippen worden getoond
-                echo "</tr>";
             
             $message1 = array(
               "tijdstip" => date("Y-m-d H:i:s"),
@@ -158,7 +166,6 @@ if(isset($_POST["contents"])) {
               $message1,
               $message2
             );
-            }
 
             foreach($messages as $msg) {
             
@@ -173,8 +180,6 @@ if(isset($_POST["contents"])) {
                
                echo $html;
             }
-            
-            
             
             
             
